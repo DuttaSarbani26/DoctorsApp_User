@@ -1,7 +1,3 @@
-
-
-
-
 import axios from "@/api/axios/axios";
 import { endPoints } from "../endPoints/endPoints";
 
@@ -12,9 +8,7 @@ type DoctorFilterPayload = {
   limit?: number;
 };
 
-export const DoctorListFunction = async (
-  payload: DoctorFilterPayload = {}
-) => {
+export const DoctorListFunction = async (payload: DoctorFilterPayload = {}) => {
   try {
     const { page = 1, limit = 50, search = "", department } = payload;
 
@@ -24,12 +18,13 @@ export const DoctorListFunction = async (
       search: search,
     });
 
-    // Add department filter if provided
     if (department && department.length > 0) {
-      department.forEach(dept => params.append('department', dept));
+      department.forEach((dept) => params.append("department", dept));
     }
 
-    const response = await axios.post(`${endPoints.doctor.doctorList}?${params.toString()}`);
+    const response = await axios.post(
+      `${endPoints.doctor.doctorList}?${params.toString()}`,
+    );
 
     return response.data;
   } catch (error: any) {
@@ -43,7 +38,13 @@ export const DoctorListFunction = async (
   }
 };
 
-export const GetDoctorSlotsFunction = async ({ doctorId, date }: { doctorId: string; date: string }) => {
+export const GetDoctorSlotsFunction = async ({
+  doctorId,
+  date,
+}: {
+  doctorId: string;
+  date: string;
+}) => {
   try {
     const response = await axios.post(endPoints.doctor.slots, {
       doctorId,
@@ -59,11 +60,11 @@ export const GetDoctorSlotsFunction = async ({ doctorId, date }: { doctorId: str
 export const getDoctorsApi = async (
   page: number,
   limit: number,
-  search: string
+  search: string,
 ) => {
   try {
     const response = await axios.get(
-      `${endPoints.doctor.doctorList}?page=${page}&limit=${limit}&search=${search}`
+      `${endPoints.doctor.doctorList}?page=${page}&limit=${limit}&search=${search}`,
     );
 
     return response.data;

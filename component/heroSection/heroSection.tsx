@@ -81,60 +81,7 @@ export default function HeroSection() {
             schedule your appointment hassle-free.
           </Typography>
 
-          <Stack direction="row" spacing={3} alignItems="center">
-            <Button
-              sx={{
-                borderRadius: "999px",
-                px: 5,
-                py: 2,
-                fontWeight: 600,
-                textTransform: "none",
-                fontSize: "16px",
-                background: "linear-gradient(135deg,#6366f1,#22c55e)",
-                color: "white",
-                boxShadow: "0 12px 30px rgba(99,102,241,0.35)",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 18px 40px rgba(99,102,241,0.45)",
-                },
-              }}
-            >
-              Book appointment
-            </Button>
-
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                background:
-                  mode === "light"
-                    ? "rgba(99,102,241,0.12)"
-                    : "rgba(129,140,248,0.25)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                backdropFilter: "blur(12px)",
-                transition: "0.3s",
-                "&:hover": {
-                  transform: "scale(1.1)",
-                },
-              }}
-            >
-              ▶
-            </Box>
-
-            <Typography
-              sx={{
-                color: mode === "light" ? "#475569" : "#cbd5f5",
-                fontSize: 15,
-              }}
-            >
-              Watch how it works
-            </Typography>
-          </Stack>
+          
         </Box>
         
         <Box
@@ -159,7 +106,7 @@ export default function HeroSection() {
             }}
           />
 
-          {/* Floating Avatars */}
+      
           <Avatar
             src="https://i.pravatar.cc/100?img=1"
             sx={{
@@ -189,7 +136,7 @@ export default function HeroSection() {
         </Box>
       </Box>
 
-      {/* BACKGROUND GLOWS */}
+  
       <Box
         sx={{
           position: "absolute",

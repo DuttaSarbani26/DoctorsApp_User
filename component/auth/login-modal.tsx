@@ -20,12 +20,8 @@ import { useRouter } from "next/navigation";
 
 import { useLoginMutation } from "@/customHooks/query/auth.query.hooks";
 
-/* 🔵 Google SVG */
 const GoogleIcon = () => (
-  <img
-    src="https://www.svgrepo.com/show/475656/google-color.svg"
-    width={18}
-  />
+  <img src="https://www.svgrepo.com/show/475656/google-color.svg" width={18} />
 );
 
 type Props = {
@@ -36,7 +32,6 @@ type Props = {
 
 const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [openReset, setOpenReset] = useState(false);
 
   const router = useRouter();
 
@@ -61,7 +56,6 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
 
   return (
     <>
-      {/* 🌈 LIGHT BACKGROUND */}
       {open && (
         <Box
           sx={{
@@ -94,7 +88,6 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
         }}
       >
         <DialogContent sx={{ position: "relative", p: 0 }}>
-          {/* ❌ CLOSE */}
           <IconButton
             onClick={onClose}
             sx={{
@@ -107,18 +100,11 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
             <Close />
           </IconButton>
 
-          {/* HEADER */}
-          <Typography
-            fontWeight={700}
-            fontSize={24}
-            mb={3}
-            color="#111"
-          >
+          <Typography fontWeight={700} fontSize={24} mb={3} color="#111">
             Login
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-            {/* EMAIL */}
             <TextField
               {...register("email", {
                 required: "Email is required",
@@ -132,7 +118,6 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               sx={inputStyle}
             />
 
-            {/* PASSWORD */}
             <TextField
               {...register("password", {
                 required: "Password is required",
@@ -148,23 +133,14 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
-                      onClick={() =>
-                        setShowPassword(!showPassword)
-                      }
-                    >
-                      {showPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
+                    <IconButton onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
 
-            {/* FORGOT PASSWORD */}
             <Box
               sx={{
                 display: "flex",
@@ -185,29 +161,18 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               </Typography>
             </Box>
 
-            {/* BUTTON */}
             <Button fullWidth type="submit" sx={primaryBtn}>
               {loggingIn ? "Logging in..." : "Submit"}
             </Button>
 
-            {/* DIVIDER */}
             <Divider sx={dividerStyle}>OR</Divider>
 
-            {/* SOCIAL */}
             <Stack direction="row" spacing={2}>
-              <Button
-                fullWidth
-                startIcon={<GoogleIcon />}
-                sx={socialBtn}
-              >
+              <Button fullWidth startIcon={<GoogleIcon />} sx={socialBtn}>
                 Google
               </Button>
 
-              <Button
-                fullWidth
-                startIcon={<Apple />}
-                sx={socialBtn}
-              >
+              <Button fullWidth startIcon={<Apple />} sx={socialBtn}>
                 Apple
               </Button>
             </Stack>
@@ -219,8 +184,6 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
 };
 
 export default LoginModal;
-
-/* ================= UI ONLY ================= */
 
 const inputStyle = {
   "& .MuiInputBase-root": {

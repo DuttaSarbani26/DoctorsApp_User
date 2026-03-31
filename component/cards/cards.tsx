@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 export default function Cards() {
   return (
     <>
-      {/* CARD 1 */}
+    
       <Box
         sx={{
           position: "absolute",
@@ -22,7 +22,6 @@ export default function Cards() {
         <Typography fontSize={12}>Active Patients</Typography>
       </Box>
 
-      {/* CARD 2 */}
       <Box
         sx={{
           position: "absolute",

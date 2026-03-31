@@ -30,7 +30,6 @@ const Footer = () => {
         mt: 8,
       }}
     >
-      {/* Top Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
         <Grid
           container
@@ -38,7 +37,6 @@ const Footer = () => {
           columnSpacing={{ xs: 6, md: 14 }}
           justifyContent="space-between"
         >
-          {/* Column 1 */}
           <Grid xs={12} md={4}>
             <Typography
               variant="h2"
@@ -87,7 +85,6 @@ const Footer = () => {
               <strong>Email :</strong> enquiry@soulblesshospital.in
             </Typography>
 
-            {/* Social Icons */}
             <Box sx={{ mt: 3 }}>
               {[FacebookIcon, InstagramIcon, YouTubeIcon, LinkedInIcon].map(
                 (Icon, i) => (
@@ -104,12 +101,11 @@ const Footer = () => {
                   >
                     <Icon />
                   </IconButton>
-                )
+                ),
               )}
             </Box>
           </Grid>
 
-          {/* Column 2 */}
           <Grid xs={12} md={4}>
             <Typography
               variant="h6"
@@ -145,7 +141,6 @@ const Footer = () => {
             ))}
           </Grid>
 
-          {/* Column 3 */}
           <Grid xs={12} md={3}>
             <Typography
               variant="h6"
@@ -196,7 +191,6 @@ const Footer = () => {
         </Grid>
       </Container>
 
-      {/* Bottom Bar */}
       <Box
         sx={{
           background:
@@ -207,8 +201,7 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" sx={{ opacity: 0.9 }}>
-          Copyright ©2026 Soulbless General Hospital Ltd. All rights
-          reserved.
+          Copyright ©2026 Soulbless General Hospital Ltd. All rights reserved.
         </Typography>
       </Box>
     </Box>

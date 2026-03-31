@@ -18,11 +18,8 @@ export default function Home() {
         <AboutUsSection />
       </Container>
       <DoctorList />
-      {/* <ContactSection /> */}
       <NearbyDiagnostics />
-      {/* <Container> */}
         <Footer />
-      {/* </Container> */}
     </>
   );
 }

@@ -18,7 +18,7 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 import { getNearbyDiagnostics } from "@/api/functions/areaMap.api";
 import L from "leaflet";
 
-// ✅ Leaflet dynamic imports
+
 const MapContainer = dynamic(
   () => import("react-leaflet").then((m) => m.MapContainer),
   { ssr: false },
@@ -34,7 +34,7 @@ const Popup = dynamic(() => import("react-leaflet").then((m) => m.Popup), {
   ssr: false,
 });
 
-// 🔴 CLEAN RED MARKER
+
 const redIcon = new L.Icon({
   iconUrl: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
   iconSize: [34, 34],
@@ -130,7 +130,6 @@ export default function NearbyDiagnostics() {
         </Box>
       )}
 
-      {/* 🧱 MAIN CONTAINER */}
       {coords && (
         <Box
           sx={{
@@ -140,7 +139,7 @@ export default function NearbyDiagnostics() {
           }}
         >
           <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
-            {/* 🗺️ MAP */}
+          
             <Box flex={2}>
               <Box sx={{ height: "520px", width: "100%" }}>
                 <MapContainer
@@ -170,7 +169,7 @@ export default function NearbyDiagnostics() {
               </Box>
             </Box>
 
-            {/* 📋 SIDEBAR */}
+           
             <Box
               flex={1}
               sx={{

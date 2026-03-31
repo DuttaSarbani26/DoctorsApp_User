@@ -25,7 +25,6 @@ export default function DoctorCard({ doctor }: any) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // Get user from localStorage
   const user =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("user") || "null")
@@ -69,7 +68,6 @@ export default function DoctorCard({ doctor }: any) {
       : "No slots available"
     : availableSlot || "No slots available";
 
-  // ⭐ static rating
   const rating = 4.5;
 
   const renderStars = () => {
@@ -137,7 +135,6 @@ export default function DoctorCard({ doctor }: any) {
             }}
           />
 
-          {/* ⭐ Rating with Icons */}
           <Box display="flex" alignItems="center" gap={0.5}>
             {renderStars()}
             <Typography variant="body2" ml={1}>
@@ -145,7 +142,6 @@ export default function DoctorCard({ doctor }: any) {
             </Typography>
           </Box>
 
-          {/* 💼 Static Experience */}
           <Typography variant="body2" color={theme.palette.text.secondary}>
             <strong>Experience:</strong> 15 years
           </Typography>

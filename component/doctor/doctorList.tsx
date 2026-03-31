@@ -23,7 +23,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import DoctorCard from "../cards/doctorCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight, faSearch, faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faSearch,
+  faFilter,
+} from "@fortawesome/free-solid-svg-icons";
 import { useDoctorsQuery } from "@/customHooks/query/doctor.query.hooks";
 
 export default function DoctorsList() {
@@ -32,19 +37,18 @@ export default function DoctorsList() {
   const prevRef = useRef<any>(null);
   const nextRef = useRef<any>(null);
 
-  // Filter states
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
   const [showAllDepartments, setShowAllDepartments] = useState(false);
 
-  // Get unique departments from data for filter options
   const { data, isLoading } = useDoctorsQuery(searchTerm);
 
   const getDepartmentName = (doctor: any): string => {
     if (!doctor) return "";
     if (typeof doctor.department === "string") return doctor.department;
     if (doctor.department?.name) return doctor.department.name;
-    if (doctor.department?.department_name) return doctor.department.department_name;
+    if (doctor.department?.department_name)
+      return doctor.department.department_name;
     return doctor.specialization ?? "";
   };
 
@@ -60,17 +64,18 @@ export default function DoctorsList() {
     return Array.from(deptSet).sort((a, b) => a.localeCompare(b));
   }, [data]);
 
-  // Filter doctors based on search and department
   const filteredDoctors = useMemo(() => {
     if (!data?.data) return [];
 
     return data.data.filter((doctor: any) => {
       const deptName = getDepartmentName(doctor).toLowerCase();
-      const matchesSearch = !searchTerm ||
+      const matchesSearch =
+        !searchTerm ||
         doctor.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         deptName.includes(searchTerm.toLowerCase());
 
-      const matchesDepartment = selectedDepartments.length === 0 ||
+      const matchesDepartment =
+        selectedDepartments.length === 0 ||
         selectedDepartments.includes(getDepartmentName(doctor));
 
       return matchesSearch && matchesDepartment;
@@ -78,10 +83,10 @@ export default function DoctorsList() {
   }, [data, searchTerm, selectedDepartments]);
 
   const handleDepartmentChange = (department: string) => {
-    setSelectedDepartments(prev =>
+    setSelectedDepartments((prev) =>
       prev.includes(department)
-        ? prev.filter(d => d !== department)
-        : [...prev, department]
+        ? prev.filter((d) => d !== department)
+        : [...prev, department],
     );
   };
 
@@ -101,7 +106,6 @@ export default function DoctorsList() {
       }}
     >
       <Container maxWidth="lg">
-        {/* HEADER */}
         <Box textAlign="center" mb={6}>
           <Typography
             variant="h3"
@@ -126,194 +130,188 @@ export default function DoctorsList() {
           </Typography>
         </Box>
 
-        {/* FILTERS SECTION */}
-     
-<Box
-  sx={{
-    mb: 6,
-    p: { xs: 2.5, md: 4 },
-    borderRadius: "20px",
-    background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${theme.palette.background.default})`,
-    border: `1px solid ${theme.palette.divider}`,
-    boxShadow:
-      mode === "dark"
-        ? "0 8px 30px rgba(0,0,0,0.5)"
-        : "0 8px 30px rgba(0,0,0,0.08)",
-    backdropFilter: "blur(10px)",
-  }}
->
-  {/* HEADER */}
-  <Box
-    display="flex"
-    alignItems="center"
-    justifyContent="space-between"
-    mb={3}
-  >
-    <Typography
-      variant="h6"
-      fontWeight={600}
-      display="flex"
-      alignItems="center"
-      gap={1}
-    >
-      <FontAwesomeIcon icon={faFilter} />
-      Filter Doctors
-    </Typography>
-
-    {(searchTerm || selectedDepartments.length > 0) && (
-      <Chip
-        label="Clear All"
-        onClick={clearFilters}
-        size="small"
-        color="secondary"
-        variant="outlined"
-        sx={{ cursor: "pointer" }}
-      />
-    )}
-  </Box>
-
-  {/* 🔍 SEARCH BAR */}
-  <TextField
-    fullWidth
-    variant="outlined"
-    placeholder="Search doctor or department..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    sx={{
-      mb: 3,
-      "& .MuiOutlinedInput-root": {
-        borderRadius: "14px",
-        background: theme.palette.background.paper,
-        transition: "0.3s",
-        "&:hover": {
-          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-        },
-        "&.Mui-focused": {
-          boxShadow: `0 0 0 2px ${theme.palette.primary.main}30`,
-        },
-      },
-    }}
-    InputProps={{
-      startAdornment: (
-        <InputAdornment position="start">
-          <FontAwesomeIcon
-            icon={faSearch}
-            style={{ color: theme.palette.text.secondary }}
-          />
-        </InputAdornment>
-      ),
-    }}
-  />
-
-  {/* ACTIVE FILTERS */}
-  {(searchTerm || selectedDepartments.length > 0) && (
-    <Box mb={3}>
-      <Typography variant="body2" color="text.secondary" mb={1}>
-        Active Filters
-      </Typography>
-      <Box display="flex" flexWrap="wrap" gap={1}>
-        {searchTerm && (
-          <Chip
-            label={`"${searchTerm}"`}
-            size="small"
-            onDelete={() => setSearchTerm("")}
-            color="primary"
-          />
-        )}
-        {selectedDepartments.map((dept) => (
-          <Chip
-            key={dept}
-            label={dept}
-            size="small"
-            onDelete={() => handleDepartmentChange(dept)}
-            color="secondary"
-          />
-        ))}
-      </Box>
-    </Box>
-  )}
-
-  {/* 🧩 DEPARTMENTS */}
-  <Box mt={2}>
-    <Typography
-      variant="body2"
-      fontWeight={500}
-      mb={1.5}
-      color="text.secondary"
-    >
-      Browse by Department
-    </Typography>
-
-    <Box display="flex" flexWrap="wrap" gap={1.2}>
-      {(showAllDepartments ? departments : departments.slice(0, 10)).map(
-        (dept) => {
-          const selected = selectedDepartments.includes(dept);
-          return (
-            <Chip
-              key={dept}
-              label={dept}
-              onClick={() => handleDepartmentChange(dept)}
-              clickable
-              sx={{
-                px: 1,
-                borderRadius: "999px",
-                fontWeight: 500,
-                background: selected
-                  ? `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
-                  : theme.palette.background.paper,
-                color: selected
-                  ? theme.palette.primary.contrastText
-                  : theme.palette.text.primary,
-                border: selected
-                  ? "none"
-                  : `1px solid ${theme.palette.divider}`,
-                transition: "all 0.25s ease",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                  background: selected
-                    ? `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
-                    : theme.palette.action.hover,
-                },
-              }}
-            />
-          );
-        }
-      )}
-    </Box>
-
-    {/* VIEW MORE / LESS */}
-    {departments.length > 5 && (
-      <Box mt={2} textAlign="center">
-        <Chip
-          label={showAllDepartments ? "View Less" : "View More"}
-          onClick={() => setShowAllDepartments((prev) => !prev)}
-          variant="outlined"
-          color="primary"
+        <Box
           sx={{
-            cursor: "pointer",
-            fontWeight: 500,
-            borderRadius: "999px",
-            px: 2,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.primary.contrastText,
-            },
+            mb: 6,
+            p: { xs: 2.5, md: 4 },
+            borderRadius: "20px",
+            background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${theme.palette.background.default})`,
+            border: `1px solid ${theme.palette.divider}`,
+            boxShadow:
+              mode === "dark"
+                ? "0 8px 30px rgba(0,0,0,0.5)"
+                : "0 8px 30px rgba(0,0,0,0.08)",
+            backdropFilter: "blur(10px)",
           }}
-        />
-      </Box>
-    )}
-  </Box>
-</Box>
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={3}
+          >
+            <Typography
+              variant="h6"
+              fontWeight={600}
+              display="flex"
+              alignItems="center"
+              gap={1}
+            >
+              <FontAwesomeIcon icon={faFilter} />
+              Filter Doctors
+            </Typography>
 
-        {/* RESULTS COUNT */}
+            {(searchTerm || selectedDepartments.length > 0) && (
+              <Chip
+                label="Clear All"
+                onClick={clearFilters}
+                size="small"
+                color="secondary"
+                variant="outlined"
+                sx={{ cursor: "pointer" }}
+              />
+            )}
+          </Box>
+
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Search doctor or department..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{
+              mb: 3,
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "14px",
+                background: theme.palette.background.paper,
+                transition: "0.3s",
+                "&:hover": {
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                },
+                "&.Mui-focused": {
+                  boxShadow: `0 0 0 2px ${theme.palette.primary.main}30`,
+                },
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    style={{ color: theme.palette.text.secondary }}
+                  />
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          {(searchTerm || selectedDepartments.length > 0) && (
+            <Box mb={3}>
+              <Typography variant="body2" color="text.secondary" mb={1}>
+                Active Filters
+              </Typography>
+              <Box display="flex" flexWrap="wrap" gap={1}>
+                {searchTerm && (
+                  <Chip
+                    label={`"${searchTerm}"`}
+                    size="small"
+                    onDelete={() => setSearchTerm("")}
+                    color="primary"
+                  />
+                )}
+                {selectedDepartments.map((dept) => (
+                  <Chip
+                    key={dept}
+                    label={dept}
+                    size="small"
+                    onDelete={() => handleDepartmentChange(dept)}
+                    color="secondary"
+                  />
+                ))}
+              </Box>
+            </Box>
+          )}
+
+          <Box mt={2}>
+            <Typography
+              variant="body2"
+              fontWeight={500}
+              mb={1.5}
+              color="text.secondary"
+            >
+              Browse by Department
+            </Typography>
+
+            <Box display="flex" flexWrap="wrap" gap={1.2}>
+              {(showAllDepartments
+                ? departments
+                : departments.slice(0, 10)
+              ).map((dept) => {
+                const selected = selectedDepartments.includes(dept);
+                return (
+                  <Chip
+                    key={dept}
+                    label={dept}
+                    onClick={() => handleDepartmentChange(dept)}
+                    clickable
+                    sx={{
+                      px: 1,
+                      borderRadius: "999px",
+                      fontWeight: 500,
+                      background: selected
+                        ? `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
+                        : theme.palette.background.paper,
+                      color: selected
+                        ? theme.palette.primary.contrastText
+                        : theme.palette.text.primary,
+                      border: selected
+                        ? "none"
+                        : `1px solid ${theme.palette.divider}`,
+                      transition: "all 0.25s ease",
+                      "&:hover": {
+                        transform: "translateY(-2px)",
+                        boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                        background: selected
+                          ? `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
+                          : theme.palette.action.hover,
+                      },
+                    }}
+                  />
+                );
+              })}
+            </Box>
+
+            {departments.length > 5 && (
+              <Box mt={2} textAlign="center">
+                <Chip
+                  label={showAllDepartments ? "View Less" : "View More"}
+                  onClick={() => setShowAllDepartments((prev) => !prev)}
+                  variant="outlined"
+                  color="primary"
+                  sx={{
+                    cursor: "pointer",
+                    fontWeight: 500,
+                    borderRadius: "999px",
+                    px: 2,
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      color: theme.palette.primary.contrastText,
+                    },
+                  }}
+                />
+              </Box>
+            )}
+          </Box>
+        </Box>
+
         <Box mb={4} textAlign="center">
           <Typography variant="h6" color="text.secondary">
-            {isLoading ? "Searching doctors..." : `${filteredDoctors.length} Doctor${filteredDoctors.length !== 1 ? 's' : ''} Found`}
+            {isLoading
+              ? "Searching doctors..."
+              : `${filteredDoctors.length} Doctor${filteredDoctors.length !== 1 ? "s" : ""} Found`}
           </Typography>
         </Box>
 
-        {/* 🎠 CAROUSEL WITH SWIPER */}
         {isLoading ? (
           <Box textAlign="center" py={8}>
             <CircularProgress />
@@ -341,7 +339,10 @@ export default function DoctorsList() {
                 1024: { slidesPerView: 3, spaceBetween: 24 },
               }}
               onBeforeInit={(swiper) => {
-                if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+                if (
+                  swiper.params.navigation &&
+                  typeof swiper.params.navigation !== "boolean"
+                ) {
                   (swiper.params.navigation as any).prevEl = prevRef.current;
                   (swiper.params.navigation as any).nextEl = nextRef.current;
                   swiper.navigation.init();
@@ -356,7 +357,6 @@ export default function DoctorsList() {
               ))}
             </Swiper>
 
-            {/* Navigation Buttons */}
             <Box
               ref={prevRef}
               sx={{
@@ -383,7 +383,10 @@ export default function DoctorsList() {
                 ml: -2,
               }}
             >
-              <FontAwesomeIcon icon={faChevronLeft} style={{ fontSize: "18px" }} />
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                style={{ fontSize: "18px" }}
+              />
             </Box>
 
             <Box
@@ -412,7 +415,10 @@ export default function DoctorsList() {
                 mr: -2,
               }}
             >
-              <FontAwesomeIcon icon={faChevronRight} style={{ fontSize: "18px" }} />
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                style={{ fontSize: "18px" }}
+              />
             </Box>
           </Box>
         ) : (
@@ -427,6 +433,5 @@ export default function DoctorsList() {
         )}
       </Container>
     </Box>
-    
-  );  
+  );
 }

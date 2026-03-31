@@ -3,7 +3,6 @@
 import React from "react";
 import { Box, Typography, Container, Stack, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
-// import { useThemeMode } from "@/providers/themeProvider";
 
 export default function AboutUsSection() {
   const theme = useTheme();
@@ -20,7 +19,7 @@ export default function AboutUsSection() {
       }}
     >
       <Container maxWidth="lg">
-        {/* 🔹 TOP SECTION (TEXT + IMAGE like Hero) */}
+        
         <Box
           sx={{
             display: "flex",
@@ -30,7 +29,7 @@ export default function AboutUsSection() {
             gap: { xs: 6, md: 10 },
           }}
         >
-          {/* TEXT */}
+         
           <Box
             component={motion.div}
             initial={{ opacity: 0, x: -40 }}
@@ -77,10 +76,10 @@ export default function AboutUsSection() {
             </Typography>
           </Box>
 
-          {/* IMAGE (YOUR IMAGE HERE) */}
+ 
           <Box
             component={motion.img}
-            src="/aboutUs.jpg" // 👉 put image in public folder
+            src="/aboutUs.jpg" 
             alt="hospital"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -94,7 +93,7 @@ export default function AboutUsSection() {
           />
         </Box>
 
-        {/* 🔥 CARDS IN SINGLE LINE (LIKE HERO STYLE) */}
+  
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={3}

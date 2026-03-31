@@ -122,7 +122,6 @@ export default function Navbar() {
   return (
     <>
       <Box position="fixed" top={0} left={0} width="100%" zIndex={1100}>
-        {/* TOP BAR */}
         <Box
           sx={{
             width: "100%",
@@ -162,7 +161,6 @@ export default function Navbar() {
           </Box>
         </Box>
 
-        {/* NAVBAR */}
         <AppBar
           position="static"
           elevation={0}
@@ -185,7 +183,6 @@ export default function Navbar() {
               gap: 20,
             }}
           >
-            {/* LOGO */}
             <Box display="flex" alignItems="center" gap={3}>
               <Image
                 src="/flower-icon.png"
@@ -205,7 +202,6 @@ export default function Navbar() {
               </Box>
             </Box>
 
-            {/* NAV ITEMS */}
             <Box display="flex" gap={6} alignItems="center">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
@@ -244,7 +240,6 @@ export default function Navbar() {
               })}
             </Box>
 
-            {/* RIGHT */}
             <Box display="flex" alignItems="center" gap={4}>
               {!isLoggedIn ? (
                 <Button
@@ -302,10 +297,8 @@ export default function Navbar() {
         </AppBar>
       </Box>
 
-      {/* OFFSET */}
       <Box sx={{ height: 140 }} />
 
-      {/* MODALS */}
       <Register
         open={openRegister}
         onClose={() => setOpenRegister(false)}

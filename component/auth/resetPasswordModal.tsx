@@ -56,7 +56,7 @@ const ResetPasswordModal: React.FC<Props> = ({ open, handleClose }) => {
     >
       <DialogContent sx={{ p: 0 }}>
         
-        {/* HEADER */}
+        
         <Box
           sx={{
             background: "linear-gradient(135deg, #1976d2, #42a5f5)",
@@ -103,7 +103,7 @@ const ResetPasswordModal: React.FC<Props> = ({ open, handleClose }) => {
           </Typography>
         </Box>
 
-        {/* BODY */}
+       
         <Box sx={{ px: 3, py: 3 }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             

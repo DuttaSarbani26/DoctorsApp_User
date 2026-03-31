@@ -19,7 +19,6 @@ import { useState } from "react";
 
 import { useSignUpMutation } from "@/customHooks/query/auth.query.hooks";
 
-/* 🔵 Google SVG */
 const GoogleIcon = () => (
   <img src="https://www.svgrepo.com/show/475656/google-color.svg" width={18} />
 );
@@ -61,7 +60,6 @@ const RegisterModal: React.FC<Props> = ({
 
   return (
     <>
-      {/* 🌈 LIGHT BACKGROUND */}
       {open && (
         <Box
           sx={{
@@ -94,7 +92,6 @@ const RegisterModal: React.FC<Props> = ({
         }}
       >
         <DialogContent sx={{ position: "relative", p: 0 }}>
-          {/* ❌ CLOSE */}
           <IconButton
             onClick={onClose}
             sx={{
@@ -107,13 +104,11 @@ const RegisterModal: React.FC<Props> = ({
             <Close />
           </IconButton>
 
-          {/* HEADER */}
           <Typography fontWeight={700} fontSize={24} mb={3} color="#111">
             Create account
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-            {/* REGISTER FIELDS */}
             <Stack direction="row" spacing={2}>
               <TextField
                 {...register("first_name", {
@@ -152,7 +147,6 @@ const RegisterModal: React.FC<Props> = ({
               sx={inputStyle}
             />
 
-            {/* EMAIL */}
             <TextField
               {...register("email", {
                 required: "Email is required",
@@ -166,7 +160,6 @@ const RegisterModal: React.FC<Props> = ({
               sx={inputStyle}
             />
 
-            {/* PASSWORD */}
             <TextField
               {...register("password", {
                 required: "Password is required",
@@ -190,7 +183,6 @@ const RegisterModal: React.FC<Props> = ({
               }}
             />
 
-            {/* CONFIRM */}
             <TextField
               {...register("confirm_password", {
                 required: "Confirm Password is required",
@@ -205,15 +197,12 @@ const RegisterModal: React.FC<Props> = ({
               sx={inputStyle}
             />
 
-            {/* BUTTON */}
             <Button fullWidth type="submit" sx={primaryBtn}>
               {registering ? "Creating..." : "Submit"}
             </Button>
 
-            {/* DIVIDER */}
             <Divider sx={dividerStyle}>OR</Divider>
 
-            {/* SOCIAL */}
             <Stack direction="row" spacing={2}>
               <Button fullWidth startIcon={<GoogleIcon />} sx={socialBtn}>
                 Google
@@ -223,7 +212,7 @@ const RegisterModal: React.FC<Props> = ({
                 Apple
               </Button>
             </Stack>
-            {/* ✅ ALREADY HAVE ACCOUNT */}
+
             <Typography mt={3} color="#444" textAlign="center">
               Already have an account?{" "}
               <span
@@ -246,7 +235,7 @@ const RegisterModal: React.FC<Props> = ({
 
 export default RegisterModal;
 
-/* ================= UI ONLY ================= */
+
 
 const inputStyle = {
   "& .MuiInputBase-root": {

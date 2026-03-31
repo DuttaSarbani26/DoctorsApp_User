@@ -53,7 +53,7 @@ export default function AppointmentModal({
     setSubmitting(true);
     try {
       await onSubmit({ date, time, name });
-      onClose(); // ✅ auto close after success
+      onClose(); 
     } finally {
       setSubmitting(false);
     }
@@ -75,7 +75,7 @@ export default function AppointmentModal({
       }}
     >
       <DialogContent sx={{ p: 0, position: "relative" }}>
-        {/* Close Button */}
+        
         <IconButton
           onClick={onClose}
           sx={{
@@ -97,7 +97,7 @@ export default function AppointmentModal({
             flexDirection: { xs: "column", md: "row" },
           }}
         >
-          {/* LEFT SIDE - Doctor Details */}
+          
           <Box
             sx={{
               flex: 1,
@@ -150,7 +150,6 @@ export default function AppointmentModal({
             </Typography>
           </Box>
 
-          {/* RIGHT SIDE - Form */}
           <Box
             sx={{
               flex: 1,
