@@ -30,20 +30,20 @@ const Footer = () => {
         mt: 8,
       }}
     >
-      <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 12 } }}>
         <Grid
           container
-          rowSpacing={6}
-          columnSpacing={{ xs: 6, md: 14 }}
+          rowSpacing={{ xs: 4, md: 6 }}
+          columnSpacing={{ xs: 3, sm: 6, md: 14 }}
           justifyContent="space-between"
         >
-          <Grid xs={12} md={4}>
+          <Grid xs={12} sm={6} md={4}>
             <Typography
               variant="h2"
               fontWeight={700}
               gutterBottom
               sx={{
-                fontSize: "1.4rem",
+                fontSize: { xs: "1.1rem", md: "1.4rem" },
                 color: mode === "light" ? "#1e293b" : "#e2e8f0",
               }}
             >
@@ -55,6 +55,7 @@ const Footer = () => {
               sx={{
                 mt: 2,
                 color: mode === "light" ? "#475569" : "#cbd5f5",
+                fontSize: { xs: "12px", md: "14px" },
               }}
             >
               <strong>Registered Address</strong>
@@ -62,7 +63,7 @@ const Footer = () => {
 
             <Typography
               variant="body2"
-              sx={{ color: mode === "light" ? "#475569" : "#cbd5f5" }}
+              sx={{ color: mode === "light" ? "#475569" : "#cbd5f5", fontSize: { xs: "12px", md: "14px" } }}
             >
               8/5, Alipore Road, Kolkata – 700 027
             </Typography>
@@ -72,6 +73,7 @@ const Footer = () => {
               sx={{
                 mt: 1,
                 color: mode === "light" ? "#475569" : "#cbd5f5",
+                fontSize: { xs: "12px", md: "14px" },
               }}
             >
               <strong>Phone :</strong>{" "}
@@ -80,12 +82,12 @@ const Footer = () => {
 
             <Typography
               variant="body2"
-              sx={{ color: mode === "light" ? "#475569" : "#cbd5f5" }}
+              sx={{ color: mode === "light" ? "#475569" : "#cbd5f5", fontSize: { xs: "12px", md: "14px" } }}
             >
               <strong>Email :</strong> enquiry@soulblesshospital.in
             </Typography>
 
-            <Box sx={{ mt: 3 }}>
+            <Box sx={{ mt: 3, display: "flex", gap: 1 }}>
               {[FacebookIcon, InstagramIcon, YouTubeIcon, LinkedInIcon].map(
                 (Icon, i) => (
                   <IconButton
@@ -93,26 +95,27 @@ const Footer = () => {
                     sx={{
                       color: mode === "light" ? "#64748b" : "#cbd5f5",
                       transition: "all 0.3s ease",
+                      p: 0.75,
                       "&:hover": {
                         color: "#6366f1",
                         transform: "translateY(-3px)",
                       },
                     }}
                   >
-                    <Icon />
+                    <Icon sx={{ fontSize: { xs: "20px", md: "24px" } }} />
                   </IconButton>
                 ),
               )}
             </Box>
           </Grid>
 
-          <Grid xs={12} md={4}>
+          <Grid xs={12} sm={6} md={4}>
             <Typography
               variant="h6"
               fontWeight={700}
               gutterBottom
               sx={{
-                fontSize: "1.3rem",
+                fontSize: { xs: "1rem", md: "1.3rem" },
                 color: mode === "light" ? "#1e293b" : "#e2e8f0",
               }}
             >
@@ -123,9 +126,9 @@ const Footer = () => {
               ["Emergency No", "033 40659801"],
               [
                 "Doctor Appointments",
-                "033 40256332 - 33 / +91 7606675554 - 55",
+                "033 40256332 - 33",
               ],
-              ["24 x 7 Helpline No", "033 90337000 / 033 35803600"],
+              ["24 x 7 Helpline No", "033 90337000"],
               ["Home Care No", "+91 7596350880"],
             ].map(([label, value]) => (
               <Typography
@@ -134,20 +137,21 @@ const Footer = () => {
                 sx={{
                   mb: 1,
                   color: mode === "light" ? "#475569" : "#cbd5f5",
+                  fontSize: { xs: "12px", md: "14px" },
                 }}
               >
-                {label} : <span style={{ color: "#ef4444" }}>{value}</span>
+                {label} : <span style={{ color: "#ef4444", fontWeight: 600 }}>{value}</span>
               </Typography>
             ))}
           </Grid>
 
-          <Grid xs={12} md={3}>
+          <Grid xs={12} sm={6} md={3}>
             <Typography
               variant="h6"
               fontWeight={700}
               gutterBottom
               sx={{
-                fontSize: "1.3rem",
+                fontSize: { xs: "1rem", md: "1.3rem" },
                 color: mode === "light" ? "#1e293b" : "#e2e8f0",
               }}
             >
@@ -169,6 +173,7 @@ const Footer = () => {
                 variant="body2"
                 sx={{
                   mb: 0.8,
+                  fontSize: { xs: "12px", md: "14px" },
                 }}
               >
                 <Link
@@ -197,10 +202,11 @@ const Footer = () => {
             "linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #22c55e 100%)",
           color: "#fff",
           textAlign: "center",
-          py: 2.5,
+          py: { xs: 2, md: 2.5 },
+          px: 2,
         }}
       >
-        <Typography variant="body2" sx={{ opacity: 0.9 }}>
+        <Typography variant="body2" sx={{ opacity: 0.9, fontSize: { xs: "12px", md: "14px" } }}>
           Copyright ©2026 Soulbless General Hospital Ltd. All rights reserved.
         </Typography>
       </Box>

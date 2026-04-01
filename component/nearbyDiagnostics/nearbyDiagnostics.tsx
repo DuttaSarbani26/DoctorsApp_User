@@ -90,34 +90,34 @@ export default function NearbyDiagnostics() {
   const centers = data?.data || [];
 
   return (
-    <Box p={3}>
+    <Box sx={{ p: { xs: 2, md: 3 }, background: "#f8fafc", minHeight: "100vh" }}>
       {/* 🔷 HEADER */}
-      <Typography variant="h5" textAlign="center" mb={2} fontWeight="bold">
+      <Typography variant="h5" textAlign="center" mb={2} fontWeight="bold" sx={{ fontSize: { xs: "18px", md: "24px" } }}>
         Nearby Diagnostics Centers
       </Typography>
 
       {/* 🔍 SEARCH */}
-      <Box display="flex" justifyContent="center" gap={1} mb={2}>
+      <Box display="flex" justifyContent="center" gap={1} mb={2} flexWrap="wrap">
         <TextField
           size="small"
           placeholder="Enter location"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          sx={{ width: 300 }}
+          sx={{ width: { xs: "100%", sm: 250, md: 300 }, minWidth: "200px" }}
         />
-        <Button variant="contained" onClick={handleSearch}>
+        <Button variant="contained" onClick={handleSearch} sx={{ whiteSpace: "nowrap" }}>
           Search
         </Button>
       </Box>
 
       {/* 📏 DISTANCE */}
-      <Box display="flex" justifyContent="center" gap={1} mb={3}>
+      <Box display="flex" justifyContent="center" gap={1} mb={3} flexWrap="wrap">
         {[5000, 10000, 20000].map((d) => (
           <Button
             key={d}
             variant={distance === d ? "contained" : "outlined"}
             onClick={() => setDistance(d)}
-            sx={{ borderRadius: 5 }}
+            sx={{ borderRadius: 5, fontSize: { xs: "12px", md: "14px" } }}
           >
             {d / 1000} KM
           </Button>
@@ -138,10 +138,10 @@ export default function NearbyDiagnostics() {
             boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
           }}
         >
-          <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
+          <Box display="flex" flexDirection={{ xs: "column", md: "row" }} sx={{ minHeight: { xs: "auto", md: "520px" } }}>
           
-            <Box flex={2}>
-              <Box sx={{ height: "520px", width: "100%" }}>
+            <Box sx={{ flex: 2, width: { xs: "100%", md: "auto" } }}>
+              <Box sx={{ height: { xs: "300px", md: "520px" }, width: "100%" }}>
                 <MapContainer
                   center={[coords.lat, coords.lng]}
                   zoom={13}
@@ -171,15 +171,16 @@ export default function NearbyDiagnostics() {
 
            
             <Box
-              flex={1}
               sx={{
-                maxHeight: "520px",
+                flex: 1,
+                maxHeight: { xs: "300px", md: "520px" },
                 overflowY: "auto",
-                p: 2,
+                p: { xs: 1.5, md: 2 },
                 background: "#f8fafc",
+                width: { xs: "100%", md: "auto" },
               }}
             >
-              <Stack spacing={2}>
+              <Stack spacing={{ xs: 1.5, md: 2 }}>
                 {centers.map((center: any) => (
                   <Card
                     key={center._id}
@@ -192,10 +193,10 @@ export default function NearbyDiagnostics() {
                       },
                     }}
                   >
-                    <CardContent>
-                      <Typography fontWeight="bold">{center.name}</Typography>
+                    <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
+                      <Typography fontWeight="bold" fontSize={{ xs: "13px", md: "15px" }}>{center.name}</Typography>
 
-                      <Typography variant="caption" color="green">
+                      <Typography variant="caption" color="green" sx={{ fontSize: { xs: "11px", md: "12px" } }}>
                         {(center.distance / 1000).toFixed(2)} km
                       </Typography>
 

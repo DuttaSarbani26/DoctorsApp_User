@@ -133,7 +133,7 @@ export default function DoctorsList() {
         <Box
           sx={{
             mb: 6,
-            p: { xs: 2.5, md: 4 },
+            p: { xs: 2, md: 4 },
             borderRadius: "20px",
             background: `linear-gradient(145deg, ${theme.palette.background.paper}, ${theme.palette.background.default})`,
             border: `1px solid ${theme.palette.divider}`,
@@ -146,9 +146,11 @@ export default function DoctorsList() {
         >
           <Box
             display="flex"
-            alignItems="center"
+            alignItems="flex-start"
             justifyContent="space-between"
             mb={3}
+            gap={2}
+            flexWrap="wrap"
           >
             <Typography
               variant="h6"
@@ -156,6 +158,7 @@ export default function DoctorsList() {
               display="flex"
               alignItems="center"
               gap={1}
+              sx={{ fontSize: { xs: "14px", md: "16px" } }}
             >
               <FontAwesomeIcon icon={faFilter} />
               Filter Doctors
@@ -179,6 +182,7 @@ export default function DoctorsList() {
             placeholder="Search doctor or department..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            size="small"
             sx={{
               mb: 3,
               "& .MuiOutlinedInput-root": {
@@ -198,7 +202,7 @@ export default function DoctorsList() {
                 <InputAdornment position="start">
                   <FontAwesomeIcon
                     icon={faSearch}
-                    style={{ color: theme.palette.text.secondary }}
+                    style={{ color: theme.palette.text.secondary, fontSize: "14px" }}
                   />
                 </InputAdornment>
               ),
@@ -207,7 +211,7 @@ export default function DoctorsList() {
 
           {(searchTerm || selectedDepartments.length > 0) && (
             <Box mb={3}>
-              <Typography variant="body2" color="text.secondary" mb={1}>
+              <Typography variant="body2" color="text.secondary" mb={1} sx={{ fontSize: { xs: "12px", md: "14px" } }}>
                 Active Filters
               </Typography>
               <Box display="flex" flexWrap="wrap" gap={1}>
@@ -238,14 +242,15 @@ export default function DoctorsList() {
               fontWeight={500}
               mb={1.5}
               color="text.secondary"
+              sx={{ fontSize: { xs: "12px", md: "14px" } }}
             >
               Browse by Department
             </Typography>
 
-            <Box display="flex" flexWrap="wrap" gap={1.2}>
+            <Box display="flex" flexWrap="wrap" gap={1}>
               {(showAllDepartments
                 ? departments
-                : departments.slice(0, 10)
+                : departments.slice(0, 8)
               ).map((dept) => {
                 const selected = selectedDepartments.includes(dept);
                 return (
@@ -254,8 +259,10 @@ export default function DoctorsList() {
                     label={dept}
                     onClick={() => handleDepartmentChange(dept)}
                     clickable
+                    size="small"
                     sx={{
                       px: 1,
+                      fontSize: { xs: "11px", md: "13px" },
                       borderRadius: "999px",
                       fontWeight: 500,
                       background: selected
@@ -281,13 +288,14 @@ export default function DoctorsList() {
               })}
             </Box>
 
-            {departments.length > 5 && (
+            {departments.length > 8 && (
               <Box mt={2} textAlign="center">
                 <Chip
                   label={showAllDepartments ? "View Less" : "View More"}
                   onClick={() => setShowAllDepartments((prev) => !prev)}
                   variant="outlined"
                   color="primary"
+                  size="small"
                   sx={{
                     cursor: "pointer",
                     fontWeight: 500,

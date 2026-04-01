@@ -6,6 +6,8 @@ html, body {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 
@@ -26,4 +28,38 @@ html {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Responsive text scaling */
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 13px;
+  }
+  
+  body {
+    font-size: 13px;
+  }
+}
+
+/* Ensure proper touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  a {
+    min-height: 44px;
+    display: inline-block;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
 
 import HeroSection from "@/component/heroSection/heroSection";
 import Navbar from "@/component/navbar/navbar";
@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Container>
-        <HeroSection />
+      <HeroSection />
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
         <AboutUsSection />
       </Container>
       <DoctorList />

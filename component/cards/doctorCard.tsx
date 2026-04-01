@@ -99,7 +99,7 @@ export default function DoctorCard({ doctor }: any) {
             theme.palette.mode === "light" ? "#e3e8f0" : "#2f3748"
           }`,
           background: theme.palette.background.paper,
-          minHeight: 220,
+          minHeight: { xs: "auto", md: 220 },
           "&:hover": {
             transform: "translateY(-8px)",
             boxShadow:
@@ -110,12 +110,13 @@ export default function DoctorCard({ doctor }: any) {
         }}
       >
         <CardContent
-          sx={{ p: 3, display: "flex", flexDirection: "column", gap: 1.25 }}
+          sx={{ p: { xs: 2, md: 3 }, display: "flex", flexDirection: "column", gap: 1.25 }}
         >
           <Typography
             variant="h6"
             fontWeight={700}
             color={theme.palette.text.primary}
+            sx={{ fontSize: { xs: "15px", md: "18px" } }}
           >
             {doctor.name || "Dr. Name"}
           </Typography>
@@ -127,6 +128,7 @@ export default function DoctorCard({ doctor }: any) {
               alignSelf: "flex-start",
               borderRadius: "8px",
               fontWeight: 600,
+              fontSize: { xs: "11px", md: "12px" },
               color: theme.palette.primary.main,
               backgroundColor:
                 theme.palette.mode === "light"
@@ -137,16 +139,16 @@ export default function DoctorCard({ doctor }: any) {
 
           <Box display="flex" alignItems="center" gap={0.5}>
             {renderStars()}
-            <Typography variant="body2" ml={1}>
+            <Typography variant="body2" ml={1} sx={{ fontSize: { xs: "12px", md: "14px" } }}>
               ({rating})
             </Typography>
           </Box>
 
-          <Typography variant="body2" color={theme.palette.text.secondary}>
+          <Typography variant="body2" color={theme.palette.text.secondary} sx={{ fontSize: { xs: "12px", md: "14px" } }}>
             <strong>Experience:</strong> 15 years
           </Typography>
 
-          <Typography variant="body2" color={theme.palette.text.secondary}>
+          <Typography variant="body2" color={theme.palette.text.secondary} sx={{ fontSize: { xs: "12px", md: "14px" } }}>
             <strong>Fees:</strong>{" "}
             {typeof feeLabel === "number" ? `₹${feeLabel}` : feeLabel}
           </Typography>

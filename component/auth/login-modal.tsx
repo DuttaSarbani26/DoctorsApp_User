@@ -79,28 +79,30 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
           animate: { opacity: 1, y: 0, scale: 1 },
           transition: { duration: 0.3 },
           sx: {
-            borderRadius: "24px",
-            p: 4,
+            borderRadius: { xs: "16px", md: "24px" },
+            p: { xs: 2, md: 4 },
             background: "rgba(255,255,255,0.8)",
             backdropFilter: "blur(20px)",
             boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+            mx: { xs: 2, sm: 0 },
           },
         }}
       >
-        <DialogContent sx={{ position: "relative", p: 0 }}>
+        <DialogContent sx={{ position: "relative", p: { xs: 2, md: 0 } }}>
           <IconButton
             onClick={onClose}
             sx={{
               position: "absolute",
-              top: 0,
-              right: 0,
+              top: { xs: 8, md: 0 },
+              right: { xs: 8, md: 0 },
               color: "#666",
+              p: 0.5,
             }}
           >
             <Close />
           </IconButton>
 
-          <Typography fontWeight={700} fontSize={24} mb={3} color="#111">
+          <Typography fontWeight={700} fontSize={{ xs: "20px", md: 24 }} mb={3} color="#111">
             Login
           </Typography>
 
@@ -116,6 +118,7 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               error={!!errors.email}
               helperText={errors.email?.message as string}
               sx={inputStyle}
+              size="small"
             />
 
             <TextField
@@ -130,10 +133,11 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               error={!!errors.password}
               helperText={errors.password?.message as string}
               sx={inputStyle}
+              size="small"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    <IconButton onClick={() => setShowPassword(!showPassword)} sx={{ p: 0.5 }}>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -152,7 +156,7 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
                 sx={{
                   cursor: "pointer",
                   color: "#1fb6c9",
-                  fontSize: "14px",
+                  fontSize: { xs: "12px", md: "14px" },
                   "&:hover": { textDecoration: "underline" },
                 }}
                 onClick={() => setOpenForgot(true)}
@@ -161,18 +165,18 @@ const LoginModal: React.FC<Props> = ({ open, onClose, setOpenForgot }) => {
               </Typography>
             </Box>
 
-            <Button fullWidth type="submit" sx={primaryBtn}>
+            <Button fullWidth type="submit" sx={{ ...primaryBtn, mt: { xs: 2, md: 3 } }}>
               {loggingIn ? "Logging in..." : "Submit"}
             </Button>
 
             <Divider sx={dividerStyle}>OR</Divider>
 
-            <Stack direction="row" spacing={2}>
-              <Button fullWidth startIcon={<GoogleIcon />} sx={socialBtn}>
+            <Stack direction="row" spacing={1} md={{ spacing: 2 }}>
+              <Button fullWidth startIcon={<GoogleIcon />} sx={socialBtn} size="small">
                 Google
               </Button>
 
-              <Button fullWidth startIcon={<Apple />} sx={socialBtn}>
+              <Button fullWidth startIcon={<Apple />} sx={socialBtn} size="small">
                 Apple
               </Button>
             </Stack>

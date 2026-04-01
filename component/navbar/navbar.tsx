@@ -18,6 +18,7 @@ import {
   Divider,
   useTheme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import Register from "../auth/register-modal";
 import OtpModal from "../auth/otp-modal";
@@ -38,6 +39,7 @@ export default function Navbar() {
   const [openForgot, setOpenForgot] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [openProfile, setOpenProfile] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { logout } = useUserStore();
   const pathname = usePathname();
@@ -127,34 +129,37 @@ export default function Navbar() {
             width: "100%",
             background: "#020617",
             color: "#648aba",
-            fontSize: "11px",
+            fontSize: { xs: "9px", sm: "11px" },
+            py: { xs: 1, sm: 1.5 },
+            px: { xs: 2, sm: 5 },
+            display: { xs: "none", sm: "block" },
           }}
         >
           <Box
             sx={{
               maxWidth: "1600px",
               mx: "auto",
-              px: 5,
-              py: 1.5,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              gap: { xs: 1, md: 4 },
+              flexWrap: "wrap",
             }}
           >
-            <Box display="flex" gap={4}>
-              <Typography>🚑 Emergency Line: (002) 01061245741</Typography>
-              <Typography>📍 Location: Kolkata, India</Typography>
-              <Typography>🕒 Mon - Fri: 8:00 am - 7:00 pm</Typography>
+            <Box display="flex" gap={{ xs: 1, md: 4 }} fontSize={{ xs: "9px", md: "11px" }}>
+              <Typography sx={{ display: { xs: "none", md: "block" } }}>🚑 Emergency: (002) 01061245741</Typography>
+              <Typography sx={{ display: { xs: "none", sm: "block" } }}>📍 Kolkata</Typography>
+              <Typography sx={{ display: { xs: "none", md: "block" } }}>🕒 Mon-Fri: 8:00-7:00 pm</Typography>
             </Box>
 
-            <Box display="flex" alignItems="center" gap={1.5}>
-              <IconButton size="small" sx={{ color: "#791a1a" }}>
+            <Box display="flex" alignItems="center" gap={1}>
+              <IconButton size="small" sx={{ color: "#791a1a", p: 0.5 }}>
                 <i className="fab fa-facebook-f" />
               </IconButton>
-              <IconButton size="small" sx={{ color: "#fff" }}>
+              <IconButton size="small" sx={{ color: "#fff", p: 0.5 }}>
                 <i className="fab fa-twitter" />
               </IconButton>
-              <IconButton size="small" sx={{ color: "#fff" }}>
+              <IconButton size="small" sx={{ color: "#fff", p: 0.5 }}>
                 <i className="fab fa-youtube" />
               </IconButton>
             </Box>
@@ -176,33 +181,33 @@ export default function Navbar() {
               maxWidth: "1600px",
               width: "100%",
               mx: "auto",
-              px: 5,
-              py: 2,
+              px: { xs: 2, sm: 3, md: 5 },
+              py: { xs: 1.5, md: 2 },
               display: "flex",
               justifyContent: "space-between",
-              gap: 20,
+              gap: { xs: 2, md: 20 },
             }}
           >
-            <Box display="flex" alignItems="center" gap={3}>
+            <Box display="flex" alignItems="center" gap={{ xs: 1.5, md: 3 }}>
               <Image
                 src="/flower-icon.png"
                 alt="Logo"
                 width={56}
                 height={56}
-                style={{ borderRadius: "12px" }}
+                style={{ borderRadius: "12px", width: "40px", height: "40px" }}
               />
 
               <Box>
-                <Typography fontWeight={900} fontSize="22px" color="#0f172a">
+                <Typography fontWeight={900} fontSize={{ xs: "14px", md: "22px" }} color="#0f172a">
                   Soulbless
                 </Typography>
-                <Typography fontSize="13px" fontWeight={600} color="#1d3455">
+                <Typography fontSize={{ xs: "10px", md: "13px" }} fontWeight={600} color="#1d3455">
                   GENERAL HOSPITAL
                 </Typography>
               </Box>
             </Box>
 
-            <Box display="flex" gap={6} alignItems="center">
+            <Box display={{ xs: "none", md: "flex" }} gap={6} alignItems="center" flex={1} justifyContent="center">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
 
@@ -240,33 +245,34 @@ export default function Navbar() {
               })}
             </Box>
 
-            <Box display="flex" alignItems="center" gap={4}>
+            <Box display="flex" alignItems="center" gap={{ xs: 1, md: 4 }}>
               {!isLoggedIn ? (
                 <Button
                   variant="contained"
                   onClick={() => setOpenRegister(true)}
                   sx={{
                     borderRadius: "12px",
-                    px: 5,
-                    py: 1.4,
-                    fontSize: "17px",
+                    px: { xs: 2, md: 5 },
+                    py: { xs: 1, md: 1.4 },
+                    fontSize: { xs: "12px", md: "17px" },
                     fontWeight: 700,
                     textTransform: "none",
                     backgroundColor: theme.palette.primary.main,
                     boxShadow: "0 6px 18px rgba(30, 64, 175, 0.35)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   Create account
                 </Button>
               ) : (
                 <>
-                  <IconButton onClick={handleProfileMenuOpen}>
+                  <IconButton onClick={handleProfileMenuOpen} sx={{ p: 0.5 }}>
                     <Avatar
                       sx={{
-                        width: 44,
-                        height: 44,
+                        width: { xs: 36, md: 44 },
+                        height: { xs: 36, md: 44 },
                         background: "linear-gradient(135deg, #6366f1, #22c55e)",
-                        fontSize: "18px",
+                        fontSize: { xs: "14px", md: "18px" },
                         fontWeight: 700,
                       }}
                     >
@@ -292,12 +298,57 @@ export default function Navbar() {
                   </Menu>
                 </>
               )}
+
+              <IconButton
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                sx={{ display: { xs: "flex", md: "none" }, p: 0.5 }}
+              >
+                <MenuIcon />
+              </IconButton>
             </Box>
           </Toolbar>
+
+          {mobileMenuOpen && (
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+                flexDirection: "column",
+                px: 2,
+                py: 2,
+                background: theme.palette.background.paper,
+                borderTop: "1px solid #334155",
+                gap: 1,
+              }}
+            >
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      color: isActive
+                        ? theme.palette.primary.main
+                        : theme.palette.text.primary,
+                      padding: "10px 8px",
+                      borderRadius: "8px",
+                      background: isActive ? theme.palette.action.hover : "transparent",
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </Box>
+          )}
         </AppBar>
       </Box>
 
-      <Box sx={{ height: 140 }} />
+      <Box sx={{ height: { xs: 140, sm: 160 } }} />
 
       <Register
         open={openRegister}

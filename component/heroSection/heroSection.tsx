@@ -19,14 +19,15 @@ export default function HeroSection() {
     <Box
       sx={{
         width: "100vw",
-        height: "100vh",
+        minHeight: { xs: "auto", md: "100vh" },
+        height: "auto",
         marginLeft: "calc(-50vw + 50%)",
         background: theme.palette.background.default,
         color: theme.palette.text.primary,
         display: "flex",
-        minHeight: "100vh",
         alignItems: "flex-start",
-        pt: { xs: 6, md: 25 },
+        pt: { xs: 8, md: 25 },
+        pb: { xs: 8, md: 0 },
         justifyContent: "center",
         position: "relative",
         overflow: "hidden",
@@ -40,8 +41,8 @@ export default function HeroSection() {
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          gap: { xs: 12, md: 20 },
-          px: { xs: 3, md: 8 },
+          gap: { xs: 6, md: 20 },
+          px: { xs: 2, sm: 3, md: 8 },
           zIndex: 2,
         }}
       >
@@ -50,14 +51,14 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          sx={{ maxWidth: 540 }}
+          sx={{ maxWidth: { xs: "100%", md: 540 } }}
         >
           <Typography
             sx={{
               fontWeight: 900,
               lineHeight: 1.15,
               mb: 4,
-              fontSize: { xs: "2.4rem", md: "4.5rem" },
+              fontSize: { xs: "1.8rem", sm: "2.4rem", md: "4.5rem" },
               letterSpacing: "-0.5px",
 
               background: "linear-gradient(90deg,#6366f1,#22c55e)",
@@ -72,7 +73,7 @@ export default function HeroSection() {
             sx={{
               color: theme.palette.text.secondary,
               mb: 5,
-              fontSize: { xs: "15px", md: "18px" },
+              fontSize: { xs: "13px", sm: "15px", md: "18px" },
               lineHeight: 1.6,
               maxWidth: 480,
             }}
@@ -89,7 +90,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
-          sx={{ position: "relative" }}
+          sx={{ position: "relative", width: { xs: "100%", md: "auto" } }}
         >
           <Box
             component="img"
@@ -97,6 +98,7 @@ export default function HeroSection() {
             alt="doctor"
             sx={{
               width: { xs: "100%", md: 780 },
+              maxWidth: "100%",
               borderRadius: "28px",
               objectFit: "cover",
               boxShadow:

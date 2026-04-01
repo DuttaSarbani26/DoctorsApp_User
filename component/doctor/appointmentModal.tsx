@@ -67,22 +67,24 @@ export default function AppointmentModal({
       fullWidth
       PaperProps={{
         sx: {
-          borderRadius: "18px",
+          borderRadius: { xs: "12px", md: "18px" },
           overflow: "hidden",
           background: "#ffffff",
           boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
+          mx: { xs: 2, sm: 0 },
         },
       }}
     >
-      <DialogContent sx={{ p: 0, position: "relative" }}>
+      <DialogContent sx={{ p: { xs: 0, sm: 0 }, position: "relative" }}>
         
         <IconButton
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 12,
-            top: 12,
+            right: { xs: 8, md: 12 },
+            top: { xs: 8, md: 12 },
             backgroundColor: "#f3f4f6",
+            zIndex: 10,
             "&:hover": {
               backgroundColor: "#e5e7eb",
             },
@@ -101,17 +103,18 @@ export default function AppointmentModal({
           <Box
             sx={{
               flex: 1,
-              p: 4,
+              p: { xs: 3, md: 4 },
               background: "linear-gradient(135deg, #f8fafc, #eef2ff)",
+              display: { xs: "none", md: "block" },
             }}
           >
             {doctor && (
               <Box mb={2}>
-                <Typography fontWeight={700} fontSize={20} color="#111d39">
+                <Typography fontWeight={700} fontSize={{ xs: "16px", md: 20 }} color="#111d39">
                   {doctor.name}
                 </Typography>
 
-                <Typography fontSize={14} color="#6b7280" mt={0.5}>
+                <Typography fontSize={{ xs: "12px", md: 14 }} color="#6b7280" mt={0.5}>
                   {doctor?.department?.name ||
                     doctor?.specialty ||
                     doctor?.role ||
@@ -119,7 +122,7 @@ export default function AppointmentModal({
                 </Typography>
 
                 <Typography
-                  fontSize={14}
+                  fontSize={{ xs: "12px", md: 14 }}
                   color="#2563eb"
                   mt={1}
                   fontWeight={600}
@@ -131,7 +134,7 @@ export default function AppointmentModal({
 
             <Divider sx={{ my: 2 }} />
 
-            <Stack spacing={1.2} color="#374151">
+            <Stack spacing={1.2} color="#374151" fontSize={{ xs: "12px", md: "14px" }}>
               <Typography>🗓 15 years of experience</Typography>
               <Typography>🎓 MD from Harvard Medical School</Typography>
               <Typography>📍 Soulbless General Hospital</Typography>
@@ -139,11 +142,11 @@ export default function AppointmentModal({
 
             <Divider sx={{ my: 3 }} />
 
-            <Typography fontWeight={600} mb={1} color="#183266">
+            <Typography fontWeight={600} mb={1} color="#183266" fontSize={{ xs: "12px", md: "14px" }}>
               About
             </Typography>
 
-            <Typography color="#4b5563" fontSize={14} lineHeight={1.6}>
+            <Typography color="#4b5563" fontSize={{ xs: "12px", md: 14 }} lineHeight={1.6}>
               Quite good in knowledge and skills needed to diagnose and treat a
               variety of diseases or injuries, as well as other physical or
               mental conditions. with over 15 years of experience.
@@ -153,20 +156,46 @@ export default function AppointmentModal({
           <Box
             sx={{
               flex: 1,
-              p: 4,
+              p: { xs: 3, md: 4 },
               backgroundColor: "#ffffff",
             }}
           >
-            <Typography fontWeight={700} fontSize={25} mb={3} color="#183266">
-              Book Appointment...
+            {/* Doctor Info on Mobile */}
+            {doctor && (
+              <Box mb={3} sx={{ display: { xs: "block", md: "none" } }}>
+                <Typography fontWeight={700} fontSize={18} color="#111d39">
+                  {doctor.name}
+                </Typography>
+
+                <Typography fontSize={12} color="#6b7280" mt={0.5}>
+                  {doctor?.department?.name ||
+                    doctor?.specialty ||
+                    doctor?.role ||
+                    ""}
+                </Typography>
+
+                <Typography
+                  fontSize={12}
+                  color="#2563eb"
+                  mt={1}
+                  fontWeight={600}
+                >
+                  ₹{doctor.fees || 500} per visit
+                </Typography>
+              </Box>
+            )}
+
+            <Typography fontWeight={700} fontSize={{ xs: "18px", md: 25 }} mb={{ xs: 2, md: 3 }} color="#183266">
+              Book Appointment
             </Typography>
 
-            <Stack spacing={3}>
+            <Stack spacing={{ xs: 2, md: 3 }}>
               <TextField
                 label="Patient Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
+                size="small"
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "10px",
@@ -182,6 +211,7 @@ export default function AppointmentModal({
                 onChange={(e) => setDate(e.target.value)}
                 InputLabelProps={{ shrink: true }}
                 fullWidth
+                size="small"
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "10px",
@@ -214,6 +244,7 @@ export default function AppointmentModal({
                   onChange={(e) => setTime(e.target.value)}
                   InputLabelProps={{ shrink: true }}
                   fullWidth
+                  size="small"
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: "10px",
@@ -227,13 +258,16 @@ export default function AppointmentModal({
                 variant="contained"
                 onClick={handleSubmit}
                 disabled={!date || !time || !name || submitting}
+                fullWidth
                 sx={{
-                  mt: 2,
-                  height: 48,
+                  mt: 1,
+                  md: { mt: 2 },
+                  height: { xs: 44, md: 48 },
                   borderRadius: "12px",
                   background: "linear-gradient(142deg, #4f46e5, #22c55e)",
                   color: "#fff",
                   fontWeight: 600,
+                  fontSize: { xs: "14px", md: "16px" },
                   textTransform: "none",
                   boxShadow: "0 6px 16px rgba(79,70,229,0.25)",
 
@@ -252,10 +286,12 @@ export default function AppointmentModal({
 
               <Button
                 onClick={onClose}
+                fullWidth
                 sx={{
                   textTransform: "none",
                   color: "#6b7280",
                   fontWeight: 500,
+                  fontSize: { xs: "14px", md: "16px" },
                   "&:hover": {
                     backgroundColor: "#f3f4f6",
                   },

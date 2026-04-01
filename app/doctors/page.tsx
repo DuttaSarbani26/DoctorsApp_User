@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import Navbar from "@/component/navbar/navbar";
 import Footer from "@/component/footer/footer";
 import DoctorListPage from "@/component/doctor/doctorList";
@@ -9,13 +9,9 @@ import DoctorListPage from "@/component/doctor/doctorList";
 export default function DoctorsPage() {
   return (
     <>
-      <Container>
-        <Navbar />
-      </Container>
+      <Navbar />
       <DoctorListPage />
-      <Container>
-        <Footer />
-      </Container>
+      <Footer />
     </>
   );
 }
